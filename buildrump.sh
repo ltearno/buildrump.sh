@@ -259,7 +259,7 @@ doesitbuild ()
 	theprog="${1}"
 	shift
 
-	warnflags="-Wmissing-prototypes -Wstrict-prototypes -Wimplicit -Werror"
+	warnflags="-Wmissing-prototypes -Wstrict-prototypes -Wimplicit -Werror -Wno-error=shift-negative-value"
 	printf "${theprog}" \
 	    | ${CC} ${warnflags} ${EXTRA_LDFLAGS} ${EXTRA_CFLAGS}	\
 		-x c - -o /dev/null $* > /dev/null 2>&1
@@ -272,7 +272,7 @@ doesitbuild_host ()
 	shift
 
 	printf "${theprog}" \
-	    | ${HOST_CC} -Wall -Werror -x c - -o /dev/null $* > /dev/null 2>&1
+	    | ${HOST_CC} -Wall -Werror -Wno-error=shift-negative-value -x c - -o /dev/null $* > /dev/null 2>&1
 }
 
 # like doesitbuild, except with c++
@@ -285,7 +285,7 @@ doesitcxx ()
 	shift
 
 	printf "${theprog}" \
-	    | ${CXX} -Werror ${EXTRA_LDFLAGS} ${EXTRA_CFLAGS}	\
+	    | ${CXX} -Werror -Wno-error=shift-negative-value ${EXTRA_LDFLAGS} ${EXTRA_CFLAGS}	\
 		-x c++ - -o /dev/null $* > /dev/null 2>&1
 }
 
